@@ -39,8 +39,8 @@ if (!isset($_SESSION["productsList"])) {
 		<div class="list-group">
 			<a href="productList.php" class="list-group-item list-group-item-action">Listado de productos</a>
 			<a href="shoppingCartView.php" class="list-group-item list-group-item-action">Cesta de la compra</a>
-			<a href="#" class="list-group-item list-group-item-action">Logoff</a>
-			<a href="#" class="list-group-item list-group-item-action">Copia de seguridad</a>
+			<a href="logoff.php" class="list-group-item list-group-item-action">Logoff</a>
+			<a href="../controller/backup.php" class="list-group-item list-group-item-action">Copia de seguridad</a>
 		</div>
 	</div>
 </body>

@@ -1,44 +1,10 @@
 <?php
 require_once "../bd/bd.php";
-require_once "createForm.php";
+require_once "../controller/createForm.php";
 require_once "../model/CestaCompra.php";
 require_once "../model/Producto.php";
 require_once "../controller/addingProductToShoppingCart.php";
-
-if (!isset($_SESSION["productsList"])) {
-	session_start();
-	$_SESSION["productsList"] = listProducts();
-}
-
-if (isset($_POST["submit"])) {
-	$shoppingCart = array();
-	for ($i = 0; $i < count($_SESSION["productsList"]); $i++) {
-		$prodctID = "prod" . ($i+1);
-		if (isset($_POST[$prodctID]) && $_POST[$prodctID] > 0) {
-			$codigo = $_SESSION["productsList"][$i]["codigo"];
-			$nombre = $_SESSION["productsList"][$i]["nombre"];
-			$nombre_corto = $_SESSION["productsList"][$i]["nombre_corto"];
-			$precio = $_SESSION["productsList"][$i]["pvp"];
-			
-			$product = new Producto($codigo, $nombre, $nombre_corto, $precio);
-		 	$shoppingCart[] = array("cantidad" => $_POST[$prodctID], "producto" => $product);
-		}
-	}
-	if (count($shoppingCart) > 0) {
-		
-		if (isset($_SESSION["shoppingCart"])) {
-			// print_r($shoppingCart);
-			$shoppingCart = addingExistingProducts($shoppingCart, $_SESSION["shoppingCart"]->__get("arrayProductos"));
-			$shoppingCart = addingNewProducts($shoppingCart, $_SESSION["shoppingCart"]->__get("arrayProductos"));
-			$_SESSION["shoppingCart"]->__set("arrayProductos", $shoppingCart);
-		} else {
-			$_SESSION["shoppingCart"] = new CestaCompra($shoppingCart);
-		}
-	
-		header("Location: shoppingCartView.php");
-	}
-}
-
+include_once "../controller/productListController.php";
 
 ?>
 
@@ -55,10 +21,10 @@ if (isset($_POST["submit"])) {
 
 <body>
 	<div class="container">
-		<h1 class="display-4 mt-5">Lista de productos</h1>
+		<h1 class="display-4 my-5">Lista de productos</h1>
 		<div class="row">
 			<div class="col-10 text-center">
-				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+				<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 					<?php
 					echo createForm();
 					?>
@@ -71,8 +37,8 @@ if (isset($_POST["submit"])) {
 			</div>
 		</div>
 		</form>
-	
-	<a href="indexLogin.php">Volver al menú</a>
+
+		<a href="indexLogin.php">Volver al menú</a>
 	</div>
 </body>
 

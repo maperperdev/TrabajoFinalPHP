@@ -2,51 +2,8 @@
 require_once "../utils/validationFunctions.php";
 require_once "../bd//bd.php";
 require_once "../exceptions/UserPasswordException.php";
-$error = "";
-
-if (isset($_SESSION["usuario"])) {
-	header("Location: indexLogin.php");
-	return;
-}
-
-if (isset($_POST["submit"])) {
-	if (!isset($_POST["usuario"])) {
-		$error .= "No introdujo ningún usuario";
-	} else {
-		$usuario = $_POST["usuario"];
-	}
-	if (!isset($_POST["password"])) {
-		$error .= "No introdujo ningúna contraseña";
-	} else {
-		$password = $_POST["password"];
-	}
-
-	if (!isset($_POST["repeatedPassword"])) {
-		$error .= "No introdujo la contraseña por duplicado";
-	} else {
-		$repeatedPassword = $_POST["repeatedPassword"];
-	}
-
-	if (strlen($error) == 0) {
-		if (isset($password) && isset($repeatedPassword)) {
-			if (strcmp($password, $repeatedPassword) != 0) {
-				$error = "Las contraseñas no coinciden";
-			} else {
-				try {
-					if (validatePassword($password)) {
-						createUser($usuario, password_hash($password, PASSWORD_DEFAULT));
-					} else {
-						throw new UserPasswordException();
-					}
-				} catch (UserPasswordException $e) {
-					echo $e->getMessage();
-				}
-			}
-		}
-	}
-}
-
-
+require_once "../utils/validationFunctions.php";
+include_once "../controller/singupController.php";
 
 ?>
 
@@ -65,6 +22,7 @@ if (isset($_POST["submit"])) {
 
 <body>
 	<div class="container">
+		<div class="display-4">Formulario de registro</div>
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
 
 			<div class="form-group">
@@ -80,9 +38,15 @@ if (isset($_POST["submit"])) {
 				<label for="repeatedPassword">Repite la contraseña</label>
 				<input class="form-control" type="password" name="repeatedPassword" placeholder="Vuelva a introducir su contraseña">
 			</div>
-			<input type="submit" class="btn btn-primary" name="submit" value="Enviar">
-		<a class="btn btn-secondary" href="../index.php">Login</a>
+			<input type="submit" class="btn btn-primary" name="submit" value="Registrarse">
+			<a class="btn btn-secondary" href="../index.php">Login</a>
 		</form>
+		<div class="error">
+			<?php if (isset($error)) echo $error; ?>
+		</div>
+		<div class="info">
+			<?php if (isset($info)) echo $info; ?>
+		</div>
 
 	</div>
 </body>

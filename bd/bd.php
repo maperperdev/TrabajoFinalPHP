@@ -1,5 +1,9 @@
 <?php
 
+//Script dedicado a la interacción con la base de datos, si se necesita se puede cambiar el
+//usuario y password para adaptarlo a la base de datos que utilice.
+
+//Listado de productos
 function listProducts()
 {
 	$servername = "localhost";
@@ -20,6 +24,7 @@ function listProducts()
 	return $result;
 }
 
+//Obtiene la contraseña del usuario
 function getPassword($usuario)
 {
 	$servername = "localhost";
@@ -40,13 +45,13 @@ function getPassword($usuario)
 	return $result;
 }
 
-function createUser($usuario, $passwordUser)
+//Crea un nuevo usuario
+function createUser($usuario, $passwordUser) 
 {
 	$servername = "localhost";
 	$username = "usuario";
 	$password = "usuario";
 	$myDB = "BDTienda";
-
 	try {
 		$conn = new PDO("mysql:host=$servername:3306;dbname=$myDB", $username, $password);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

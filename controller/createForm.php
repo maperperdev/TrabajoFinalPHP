@@ -1,4 +1,7 @@
 <?php
+/**
+ * Crea el formulario de productos.
+ */
 if (!isset($_SESSION["listaProductos"])) {
 	session_start();
 	$_SESSION["listaProductos"] = listProducts();
