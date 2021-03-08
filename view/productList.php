@@ -25,12 +25,16 @@ if (isset($_POST["submit"])) {
 		}
 	}
 	if (count($shoppingCart) > 0) {
+		
 		if (isset($_SESSION["shoppingCart"])) {
-			print_r($shoppingCart);
-			$shoppingCart = addingExistingProducts($shoppingCart, $_SESSION["shoppingCart"]);
-			$shoppingCart = addingNewProducts($shoppingCart, $_SESSION["shoppingCart"]);
+			// print_r($shoppingCart);
+			$shoppingCart = addingExistingProducts($shoppingCart, $_SESSION["shoppingCart"]->__get("arrayProductos"));
+			$shoppingCart = addingNewProducts($shoppingCart, $_SESSION["shoppingCart"]->__get("arrayProductos"));
+			$_SESSION["shoppingCart"]->__set("arrayProductos", $shoppingCart);
+		} else {
+			$_SESSION["shoppingCart"] = new CestaCompra($shoppingCart);
 		}
-		$_SESSION["shoppingCart"] = new CestaCompra($shoppingCart);
+	
 		header("Location: shoppingCartView.php");
 	}
 }

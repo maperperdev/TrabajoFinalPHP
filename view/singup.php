@@ -1,7 +1,7 @@
 <?php
-require_once "utils/validationFunctions.php";
-require_once "bd//bd.php";
-require_once "exceptions/UserPasswordException.php";
+require_once "../utils/validationFunctions.php";
+require_once "../bd//bd.php";
+require_once "../exceptions/UserPasswordException.php";
 $error = "";
 
 if (isset($_SESSION["usuario"])) {
@@ -81,7 +81,7 @@ if (isset($_POST["submit"])) {
 				<input class="form-control" type="password" name="repeatedPassword" placeholder="Vuelva a introducir su contraseña">
 			</div>
 			<input type="submit" class="btn btn-primary" name="submit" value="Enviar">
-		<a class="btn btn-secondary" href="index.php">Login</a>
+		<a class="btn btn-secondary" href="../index.php">Login</a>
 		</form>
 
 	</div>

@@ -1,4 +1,6 @@
 <?php
+require_once "../model/Producto.php";
+require_once "../model/CestaCompra.php";
 
 //Suma las cantidades de productos de la cesta a los ya existentes
 function addingExistingProducts($newProductsArray, $oldProductsArray) {

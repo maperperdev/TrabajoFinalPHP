@@ -24,7 +24,7 @@ if (isset($_POST["submit"])) {
 		$retrievedPassword = getPassword($usuario);
 		if ($retrievedPassword == null) {
 			$error = "No existe ese usuario";
-			$resgistrar = "<a href=\"singup.php\">Regístrese</a>";
+			$resgistrar = "<a href=\"view/singup.php\">Regístrese</a>";
 		} else {
 			if (password_verify($password, $retrievedPassword[0]["password"])) {
 				session_start();
@@ -32,7 +32,6 @@ if (isset($_POST["submit"])) {
 				echo "hola";
 				header("Location: view/indexLogin.php");
 			} else {
-				$resgistrar = "<a href=\"view/singup.php\">Regístrese</a>";
 				$error .= "La contraseña es incorrecta";
 			}
 		}
