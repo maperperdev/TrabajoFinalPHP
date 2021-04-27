@@ -35,7 +35,7 @@ include_once "../controller/singupController.php";
 				<input class="form-control" type="password" name="password" placeholder="Contraseña">
 			</div>
 			<div class="form-group">
-				<label for="repeatedPassword">Repite la contraseña</label>
+				<label for="repeatedPassword">Repita la contraseña</label>
 				<input class="form-control" type="password" name="repeatedPassword" placeholder="Vuelva a introducir su contraseña">
 			</div>
 			<input type="submit" class="btn btn-primary" name="submit" value="Registrarse">

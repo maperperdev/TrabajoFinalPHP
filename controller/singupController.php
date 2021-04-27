@@ -10,22 +10,25 @@ if (isset($_SESSION["usuario"])) {
 if (isset($_POST["submit"])) {
 	$info = "";
 	$error = "";
-	if (strlen($_POST["usuario"]) == 0) {
+	$usuario = "";	
+	$usuario = $_POST["usuario"];
+	$password = "";
+	$password = $_POST["password"];
+	$repeatedPassword = "";
+	$repeatedPassword = $_POST["repeatedPassword"];	
+	
+	if ($usuario == "") {
 		$error .= "<p>No introdujo ningún usuario</p>";
-	} else {
-		$usuario = $_POST["usuario"];
-	}
-	if (strlen($_POST["password"] == 0)) {
+	} 
+	
+	if ($password == "") {
 		$error .= "<p>No introdujo ningúna contraseña</p>";
-	} else {
-		$password = $_POST["password"];
+	} 	
+
+	if ($repeatedPassword == "") {
+		$error .= "<p>No introdujo la contraseña por duplicado</p>";
 	}
 
-	if (strlen($_POST["repeatedPassword"]) == 0) {
-		$error .= "<p>No introdujo la contraseña por duplicado</p>";
-	} else {
-		$repeatedPassword = $_POST["repeatedPassword"];
-	}
 	if (strlen($error) == 0) {
 		if (strcmp($password, $repeatedPassword) != 0) {
 			$error .= "<p>Las contraseñas no coinciden</p>";
